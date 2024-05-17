@@ -1,0 +1,7 @@
+venv/
+.env
+.pytest_cache/
+.vscode/
+db.sqllite3
+__pycache__/
+migrations/

@@ -1,0 +1,644 @@
+openapi: 3.0.3
+info:
+  title: Vendor Management System
+  version: 0.0.0
+paths:
+  /api/purchase_orders/:
+    get:
+      operationId: api_purchase_orders_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+          description: ''
+    post:
+      operationId: api_purchase_orders_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+  /api/purchase_orders/{po_id}/:
+    get:
+      operationId: api_purchase_orders_retrieve
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+    put:
+      operationId: api_purchase_orders_update
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+    delete:
+      operationId: api_purchase_orders_destroy
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/purchase_orders/{po_id}/acknowledge:
+    post:
+      operationId: api_purchase_orders_acknowledge_create
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/purchase_orders/{po_id}/rating:
+    post:
+      operationId: api_purchase_orders_rating_create
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/schema:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/vendors/:
+    get:
+      operationId: api_vendors_retrieve
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    post:
+      operationId: api_vendors_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+  /api/vendors/{vendor_id}/:
+    get:
+      operationId: api_vendors_retrieve_2
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    put:
+      operationId: api_vendors_update
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    delete:
+      operationId: api_vendors_destroy
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/vendors/{vendor_id}/performance:
+    get:
+      operationId: api_vendors_performance_retrieve
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/vendors/{vendor_id}/performance-history:
+    get:
+      operationId: api_vendors_performance_history_retrieve
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/vendors/login:
+    post:
+      operationId: api_vendors_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/vendors/login/refresh:
+    post:
+      operationId: api_vendors_login_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        po_number:
+          type: string
+          readOnly: true
+        vendor_id:
+          type: string
+          writeOnly: true
+        order_date:
+          type: string
+          format: date-time
+          readOnly: true
+        expected_delivery_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        delivery_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        items: {}
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          readOnly: true
+        quality_rating:
+          type: number
+          format: double
+          readOnly: true
+          nullable: true
+        issue_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        acknowledgement_date:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        vendor:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - acknowledgement_date
+      - delivery_date
+      - expected_delivery_date
+      - issue_date
+      - items
+      - order_date
+      - po_number
+      - quality_rating
+      - quantity
+      - status
+      - vendor
+      - vendor_id
+    StatusEnum:
+      enum:
+      - canceled
+      - pending
+      - completed
+      type: string
+      description: |-
+        * `canceled` - Canceled
+        * `pending` - Pending
+        * `completed` - Completed
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+      required:
+      - password
+      - username
+    Vendor:
+      type: object
+      properties:
+        vendor_code:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        contact_details:
+          type: string
+          maxLength: 12
+        address:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+      - address
+      - contact_details
+      - name
+      - user
+      - vendor_code
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

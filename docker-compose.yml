@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  api:
+    image: vendor-restapi
+    container_name: vendor_container
+    build: .
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    environment:
+      - DB_HOST=postgres-db
+
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:16.3-alpine3.18
+    container_name: postgres-db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres-db:
