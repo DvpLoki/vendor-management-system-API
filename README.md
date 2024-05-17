@@ -36,17 +36,29 @@ DB_NAME='vendorapi'
 DEBUG='True'
 ```
 
-### 2. install dependencies
+### 2. Create and Activate Virtual Environment
+
+> Its a best practice to always use a virtual environment
+
+#### Create Virtual Environment
+
+    Python -m venv venv-vendor
+
+#### Activate Virtual Environment for Windows
+
+    venv-vendor\Scripts\activate
+
+### 3. install dependencies
 
 - if you have docker simply run `docker-compose up`
 - else run `pip install -r requirements.txt` make sure you have python and pip installed
 
-### 3. make migrations and run server
+### 4. make migrations and run server
 
 - `python manage.py migrate`
 - `python manage.py runserver` server will be running on `http://127.0.0.1:8000/`, use any API client or use swagger UI at `http://127.0.0.1:8000/api/schema/docs/`
 
-### 4. Testing
+### 5. Testing
 
 - if you want to run tests simply run `pytest -v`
 
